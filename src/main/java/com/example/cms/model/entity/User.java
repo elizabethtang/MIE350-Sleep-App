@@ -13,6 +13,7 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor
 @Getter
 @Setter
+@Table(name = "users")
 public abstract class User {
 
     @Id
