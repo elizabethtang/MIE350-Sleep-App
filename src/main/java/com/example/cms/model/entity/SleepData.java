@@ -27,9 +27,6 @@ public class SleepData {
     @JoinColumn(name="userUsername")
     private User user;
 
-
-
-
     /*
     @ManyToOne
     @MapsId("courseId")
@@ -76,6 +73,28 @@ public class SleepData {
 
     private String dream; // user doesn't have to put any dream notes
 
+    
+    public SleepData(Long SleepDataId, User user, int starthour, int startminute,  int endhour, int endminute,  int startday, int endday, int startmonth, int endmonth, int startyear, int endyear, int starttiredness, int endtiredness, String dream){
+        this.SleepDataId = SleepDataId;
+        this.user = user;
+        this.starthour = starthour;
+        this.startminute = startminute;
+        this.endhour = endhour;
+        this.endminute = endminute;
+        this.startday = startday;
+        this.endday = endday;
+        this.startmonth = startmonth;
+        this.endmonth = endmonth;
+        this.startyear = startyear;
+        this.endyear = endyear;
+        this.starttiredness = starttiredness;
+        this.endtiredness = endtiredness;
+        this.dream = dream;
+        
+        
+
+        
+    }
 
 
 }
