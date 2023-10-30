@@ -14,7 +14,11 @@ import javax.validation.constraints.NotEmpty;
 @Getter
 @Setter
 @Table(name = "users")
+<<<<<<< HEAD
 public class User {
+=======
+public abstract class User {
+>>>>>>> 09562358bad8310affdba18350bd9d8cfc93fb49
 
     @Id
     private String username; //username; question: do we want it to be integer or string
