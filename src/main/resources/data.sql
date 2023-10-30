@@ -15,6 +15,9 @@ INSERT INTO students (id, firstName, lastName, initials, email) VALUES (0123, 'J
 INSERT INTO students (id, firstName, lastName, initials, email) VALUES (8945, 'Chloe', 'Ha', 'C.H.'. 'c.h@mail.univ.ca');
 INSERT INTO students (id, firstName, lastName, initials, email) VALUES (5685, 'Mary', 'Bone', 'M.B'. 'mr.big@mail.univ.ca');
 
+INSERT INTO users (username, firstName, lastName, email, month, day, year, pass) VALUES ('arman', 'Armanbek', 'Narzibekov', 'arman.narzibekov@mail.utoronto.ca', 1, 12, 2002, 'hello');
+INSERT INTO recommendations (recommendationId, sleepAmount, user) VALUES (11111, 12, 'arman');
+INSERT INTO sleepdatas (SleepDataId, user, starthour, startminute,  endhour, endminute, startday, endday, startmonth, endmonth,  startyear,  endyear,  starttiredness,  endtiredness,  dream) VALUES (33333, 'arman' , 12 , 3 , 4 , 5 , 6 , 8 , 3 , 1 , 2 , 4 , 5 , 66 , 'it was alrigtht');
 
 INSERT INTO professors (id, firstName, lastName, email, office, salary) VALUES (1122, 'Sansa', 'Stark', 'sansa.stark@univ.ca', 'BA1234', 50000);
 INSERT INTO professors (id, firstName, lastName, email, office, salary) VALUES (3344, 'Arya', 'Stark', 'arya.stark@univ.ca', 'MC1234', 70000);
