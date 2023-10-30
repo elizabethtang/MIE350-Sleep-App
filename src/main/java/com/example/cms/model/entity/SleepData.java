@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -14,7 +15,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "sleepdata")
+@Table(name = "sleepdatas")
 public class SleepData {
 
     @Id
@@ -24,16 +25,10 @@ public class SleepData {
 
 
     @ManyToOne
-    @JoinColumn(name="userUsername")
+    @JoinColumn(name="user_Username")
     private User user;
 
-    /*
-    @ManyToOne
-    @MapsId("courseId")
-    @JoinColumn(name = "courseCode")
-    @JsonIgnoreProperties({"marks"})
-    private Course course;
-    */
+
 
     @NotNull
     private int starthour;
@@ -71,6 +66,7 @@ public class SleepData {
     @NotNull
     private int endtiredness;
 
+    @Nullable
     private String dream; // user doesn't have to put any dream notes
 
     

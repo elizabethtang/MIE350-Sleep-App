@@ -21,21 +21,23 @@ public class Recommendation {
     @NotEmpty
     private Long recommendationId;
 
+    @NotEmpty
     private int sleepAmount;
 
-    @ManyToOne
-    @JoinColumn(name="userUsername")
-    private User user;
+   // @ManyToOne
+   // @JoinColumn(name="userUsername")
+   // private User user;
 
 
 
 
 
 
-    public Recommendation(Long Id, int sleepamount, User user){
+
+    public Recommendation(Long Id, int sleepAmount, User user){
         this.recommendationId = Id;
-        this.sleepAmount = sleepamount;
-        this.user = user;
+        this.sleepAmount = sleepAmount;
+        //this.user = user;
     }
 
 }

@@ -3,22 +3,21 @@ package com.example.cms.model.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.lang.Nullable;
 
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import java.util.ArrayList;
+import java.util.List;
 
-@MappedSuperclass
+@Entity
+@NoArgsConstructor
 @Getter
 @Setter
 @Table(name = "users")
-<<<<<<< HEAD
 public class User {
-=======
-public abstract class User {
->>>>>>> 09562358bad8310affdba18350bd9d8cfc93fb49
+
 
     @Id
     private String username; //username; question: do we want it to be integer or string
@@ -45,6 +44,16 @@ public abstract class User {
     @NotEmpty
     private String password;
 
+/*
+    @OneToMany(mappedBy = "user")
+    @Nullable
+    private List<SleepData> sleeps  = new ArrayList<>();
+
+
+    @OneToMany(mappedBy = "user")
+    @Nullable
+    private List<Recommendation> recommendations  = new ArrayList<>();
+*/
     public User(String username, String first, String last, String email, int month, int day, int year,String pass){
         this.username = username;
         this.firstName = first;

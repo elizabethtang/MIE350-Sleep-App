@@ -24,7 +24,5 @@ public class Student extends Person {
     @OneToMany(mappedBy = "student")
     @Nullable
     private List<CourseMark> marks  = new ArrayList<>();
-    @Nullable
-    private String initials;
 
 }
