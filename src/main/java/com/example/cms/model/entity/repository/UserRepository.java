@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
@@ -15,6 +16,15 @@ public interface UserRepository extends JpaRepository<User, String> {
             "where lower(u.firstName) like lower(concat('%', :searchTerm, '%')) " +
             "or lower(u.lastName) like lower(concat('%', :searchTerm, '%'))", nativeQuery = true)
     List<User> search(@Param("searchTerm") String searchTerm);
+
+    @Query(value = "select * from users u " +
+            "where lower(u.username) like lower(concat('%', :username, '%')) " +
+            "and lower(u.password) like lower(concat('%', :password, '%'))", nativeQuery = true)
+    User findById(Long username, String password);
+
+    @Query(value = "SELECT COUNT(*) FROM users u WHERE lower(u.username) = lower(:username)", nativeQuery = true)
+    int existsByUsername(@Param("username") String username);
+
 
     /*
     @Query(value = "select * from students where " +

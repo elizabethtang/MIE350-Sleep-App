@@ -6,14 +6,15 @@ import lombok.Setter;
 
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 @MappedSuperclass
-@NoArgsConstructor
 @Getter
 @Setter
-public abstract class User {
+@Table(name = "users")
+public class User {
 
     @Id
     private String username; //username; question: do we want it to be integer or string
