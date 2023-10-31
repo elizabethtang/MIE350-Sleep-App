@@ -10,18 +10,17 @@ INSERT INTO students (id, firstName, lastName, email) VALUES (2222, 'Cersei', 'L
 INSERT INTO students (id, firstName, lastName, email) VALUES (3333, 'Jaime', 'Lannister', 'jaime.lannister@mail.univ.ca');
 INSERT INTO students (id, firstName, lastName, email) VALUES (4444, 'Daenerys', 'Targaryen', 'jaime.targaryen@mail.univ.ca');
 INSERT INTO students (id, firstName, lastName, email) VALUES (5555, 'Jon', 'Snow', 'jon.snow@mail.univ.ca');
-INSERT INTO students (id, firstName, lastName, initials, email) VALUES (3555, 'John', 'Smile', 'J.S'. 'j.s@mail.univ.ca');
-INSERT INTO students (id, firstName, lastName, initials, email) VALUES (0123, 'Jasper', 'Singh', 'J.S'. 'jas.singh@mail.univ.ca');
-INSERT INTO students (id, firstName, lastName, initials, email) VALUES (8945, 'Chloe', 'Ha', 'C.H.'. 'c.h@mail.univ.ca');
-INSERT INTO students (id, firstName, lastName, initials, email) VALUES (5685, 'Mary', 'Bone', 'M.B'. 'mr.big@mail.univ.ca');
 
-INSERT INTO users (username, firstName, lastName, email, month, day, year, pass) VALUES ('arman', 'Armanbek', 'Narzibekov', 'arman.narzibekov@mail.utoronto.ca', 1, 12, 2002, 'hello');
-INSERT INTO recommendations (recommendationId, sleepAmount, user) VALUES (11111, 12, 'arman');
-INSERT INTO sleepdatas (SleepDataId, user, starthour, startminute,  endhour, endminute, startday, endday, startmonth, endmonth,  startyear,  endyear,  starttiredness,  endtiredness,  dream) VALUES (33333, 'arman' , 12 , 3 , 4 , 5 , 6 , 8 , 3 , 1 , 2 , 4 , 5 , 66 , 'it was alrigtht');
+
 
 INSERT INTO professors (id, firstName, lastName, email, office, salary) VALUES (1122, 'Sansa', 'Stark', 'sansa.stark@univ.ca', 'BA1234', 50000);
 INSERT INTO professors (id, firstName, lastName, email, office, salary) VALUES (3344, 'Arya', 'Stark', 'arya.stark@univ.ca', 'MC1234', 70000);
 INSERT INTO professors (id, firstName, lastName, email, office, salary) VALUES (5566, 'Jorah', 'Mormont', 'jorah.mormont@univ.ca', 'MY1234', 60000);
+
+INSERT INTO users (username, firstName, lastName, email, birthMonth, birthDay, birthYear, password) VALUES ('bruh', 'Armanbek', 'Narzibekov', 'arman.narzibekov@mail.utoronto.ca', 1, 12, 2002, 'password');
+INSERT INTO recommendations (recommendationId, sleepAmount, username) VALUES (11111, 12, 'bruh');
+INSERT INTO sleepDatas (SleepDataId, user_Username, startHour, startMinute,  endHour, endMinute, startDay, endDay, startMonth, endMonth,  startYear,  endYear,  startTiredness,  endTiredness,  dream) VALUES (333335, 'bruh' , 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 10 , 11 , 12 , 'idk');
+
 
 INSERT INTO courses (code, name, professorId) VALUES ('GOT123', 'A Game of Thrones', 1122);
 INSERT INTO courses (code, name, professorId) VALUES ('GOT456', 'A Clash of Kings', 3344);

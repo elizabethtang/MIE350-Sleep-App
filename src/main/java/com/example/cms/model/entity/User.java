@@ -8,6 +8,7 @@ import org.springframework.lang.Nullable;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,14 +33,14 @@ public class User {
     @NotEmpty
     private String email;
 
-    @NotEmpty
-    private int month;
+    @NotNull
+    private int birthMonth;
 
-    @NotEmpty
-    private int  day;
+    @NotNull
+    private int birthDay;
 
-    @NotEmpty
-    private int year;
+    @NotNull
+    private int birthYear;
 
     @NotEmpty
     private String password;
@@ -59,9 +60,9 @@ public class User {
         this.firstName = first;
         this.lastName = last;
         this.email = email;
-        this.month = month;
-        this.day = day;
-        this.year = year;
+        this.birthMonth = month;
+        this.birthDay = day;
+        this.birthYear = year;
         this.password = pass;
     }
 

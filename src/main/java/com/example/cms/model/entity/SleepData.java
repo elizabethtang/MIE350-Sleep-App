@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "sleepdatas")
+@Table(name = "sleepDatas")
 public class SleepData {
 
     @Id
@@ -31,61 +31,61 @@ public class SleepData {
 
 
     @NotNull
-    private int starthour;
+    private int startHour;
 
     @NotNull
-    private int startminute;
+    private int startMinute;
 
     @NotNull
-    private int endhour;
+    private int endHour;
 
     @NotNull
-    private int endminute;
+    private int endMinute;
 
     @NotNull
-    private int startday; // account for 31 - 1
+    private int startDay; // account for 31 - 1
 
     @NotNull
-    private int endday;
+    private int endDay;
 
     @NotNull
-    private int startmonth;
+    private int startMonth;
 
     @NotNull
-    private int endmonth;
+    private int endMonth;
 
     @NotNull
-    private int startyear;
+    private int startYear;
 
     @NotNull
-    private int endyear;
+    private int endYear;
 
     @NotNull
-    private int starttiredness;
+    private int startTiredness;
 
     @NotNull
-    private int endtiredness;
+    private int endTiredness;
 
     @Nullable
-    private String dream; // user doesn't have to put any dream notes
+    private String Dream; // user doesn't have to put any dream notes
 
     
-    public SleepData(Long SleepDataId, User user, int starthour, int startminute,  int endhour, int endminute,  int startday, int endday, int startmonth, int endmonth, int startyear, int endyear, int starttiredness, int endtiredness, String dream){
+    public SleepData(Long SleepDataId, User user, int startHour, int startMinute,  int endHour, int endMinute,  int startDay, int endDay, int startMonth, int endMonth, int startYear, int endYear, int startTiredness, int endTiredness, String dream){
         this.SleepDataId = SleepDataId;
         this.user = user;
-        this.starthour = starthour;
-        this.startminute = startminute;
-        this.endhour = endhour;
-        this.endminute = endminute;
-        this.startday = startday;
-        this.endday = endday;
-        this.startmonth = startmonth;
-        this.endmonth = endmonth;
-        this.startyear = startyear;
-        this.endyear = endyear;
-        this.starttiredness = starttiredness;
-        this.endtiredness = endtiredness;
-        this.dream = dream;
+        this.startHour = startHour;
+        this.startMinute = startMinute;
+        this.endHour = endHour;
+        this.endMinute = endMinute;
+        this.startDay = startDay;
+        this.endDay = endDay;
+        this.startMonth = startMonth;
+        this.endMonth = endMonth;
+        this.startYear = startYear;
+        this.endYear = endYear;
+        this.startTiredness = startTiredness;
+        this.endTiredness = endTiredness;
+        this.Dream = dream;
         
         
 

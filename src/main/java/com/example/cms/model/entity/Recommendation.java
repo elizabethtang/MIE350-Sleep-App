@@ -24,9 +24,9 @@ public class Recommendation {
     @NotEmpty
     private int sleepAmount;
 
-   // @ManyToOne
-   // @JoinColumn(name="userUsername")
-   // private User user;
+    @ManyToOne
+    @JoinColumn(name="username")
+    private User appUser;
 
 
 
@@ -34,10 +34,10 @@ public class Recommendation {
 
 
 
-    public Recommendation(Long Id, int sleepAmount, User user){
+    public Recommendation(Long Id, int sleepAmount, User appUser){
         this.recommendationId = Id;
         this.sleepAmount = sleepAmount;
-        //this.user = user;
+        this.appUser = appUser;
     }
 
 }
