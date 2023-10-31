@@ -1,8 +1,5 @@
 package com.example.cms;
 
-import com.example.cms.model.entity.Course;
-import com.example.cms.model.entity.repository.CourseRepository;
-import com.example.cms.model.entity.repository.ProfessorRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.jupiter.api.Test;
