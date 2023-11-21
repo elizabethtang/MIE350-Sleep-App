@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RecommendationRepository extends JpaRepository< Recommendation, Long> {
 
+    Recommendation getRecentRecommendation(String username);
 }
 

@@ -1,7 +1,7 @@
 package com.example.cms.controller.exceptions;
 
 public class SleepDataNotFoundException extends RuntimeException{
-    public SleepDataNotFoundException(Long id) {
+    public SleepDataNotFoundException(String id) {
         super("Could not find sleep data");
     }
 }
