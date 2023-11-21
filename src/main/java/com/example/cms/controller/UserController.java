@@ -1,5 +1,6 @@
 package com.example.cms.controller;
 
+import com.example.cms.controller.exceptions.UserAlreadyExistsException;
 import com.example.cms.controller.exceptions.UserNotFoundException;
 import com.example.cms.model.entity.User;
 import com.example.cms.model.entity.repository.UserRepository;
@@ -27,7 +28,7 @@ public class UserController {
     public String createUser(@RequestBody User newUser) {
         //if username already exists return this
         if (repository.existsByUsername(newUser.getUsername()) > 0) {
-            return "Username already exists. User creation failed.";
+            throw new UserAlreadyExistsException();
         }
         // Save the new user to the repository
         User savedUser = repository.save(newUser);
