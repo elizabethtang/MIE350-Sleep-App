@@ -2,9 +2,12 @@ package com.example.cms.controller;
 
 import com.example.cms.controller.exceptions.RecommendationNotFoundException;
 import com.example.cms.model.entity.Recommendation;
-import com.example.cms.model.entity.repository.RecommendationRepository;
+import com.example.cms.model.entity.User;
+import com.example.cms.model.repository.RecommendationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Random;
 
 @CrossOrigin
 @RestController
@@ -16,10 +19,11 @@ public class RecommendationController {
         this.repository = repository;
     }
 
-    //FIX THIS UUID.randomUUID()
-    public void save(String username, int sleepRecommendation) {
-        long placeholder = 1;
-        Recommendation recommendation = new Recommendation(placeholder, sleepRecommendation, username);
+    public void create(User user, int sleepRecommendation) {
+        Random random = new Random();
+        // Generate a random long value
+        long recommendationId = random.nextLong();
+        Recommendation recommendation = new Recommendation(recommendationId, sleepRecommendation, user);
         Recommendation newRecommendation = repository.save(recommendation);
     }
 

@@ -1,4 +1,4 @@
-package com.example.cms.model.entity.repository;
+package com.example.cms.model.repository;
 
 import com.example.cms.model.entity.Email;
 import com.example.cms.model.entity.SleepData;

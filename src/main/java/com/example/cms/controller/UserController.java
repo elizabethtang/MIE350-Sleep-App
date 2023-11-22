@@ -3,7 +3,7 @@ package com.example.cms.controller;
 import com.example.cms.controller.exceptions.UserAlreadyExistsException;
 import com.example.cms.controller.exceptions.UserNotFoundException;
 import com.example.cms.model.entity.User;
-import com.example.cms.model.entity.repository.UserRepository;
+import com.example.cms.model.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

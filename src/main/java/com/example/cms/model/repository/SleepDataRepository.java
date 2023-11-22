@@ -1,4 +1,4 @@
-package com.example.cms.model.entity.repository;
+package com.example.cms.model.repository;
 
 import com.example.cms.model.entity.SleepData;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,7 +8,8 @@ import java.util.List;
 
 @Repository
 public interface SleepDataRepository extends JpaRepository<SleepData, Long> {
-    List<SleepData> dailySleep(String username, String start, String end);
+
+    List<SleepData> sleepDataDuration(String username, String start, String end);
 
     
     /*
