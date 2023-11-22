@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RecommendationRepository extends JpaRepository< Recommendation, Long> {
-
+    //TODO
     Recommendation getRecentRecommendation(String username);
 }
 

@@ -15,7 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name = "emailMessages")
-
+//TODO
 public class Email {
     @Id
     @NotEmpty
