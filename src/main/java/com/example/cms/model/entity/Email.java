@@ -32,9 +32,7 @@ public class Email {
     @JoinColumn(name = "recommendationId")
     private Recommendation recommendation;
 
-    @OneToOne
-    @JoinColumn(name = "activityId")
-    private Activity activity;
+
 
 
 
@@ -47,8 +45,6 @@ public class Email {
         this.emailMessage = emailMessage;
         this.appUser = appUser;
         this.recommendation = recommendation;
-        this.activity = activity;
-
     }
 
 }

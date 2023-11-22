@@ -4,13 +4,12 @@ import com.example.cms.model.entity.SleepData;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
-public interface SleepDataRepository extends JpaRepository<SleepData, SleepDataKey> {
-    SleepData getReferenceById(Long sleepDataId);
+public interface SleepDataRepository extends JpaRepository<SleepData, Long> {
+    List<SleepData> dailySleep(String username, String start, String end);
 
-    boolean existsById(Long sleepDataId);
-
-    void deleteById(Long sleepDataId);
     
     /*
     @Modifying

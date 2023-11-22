@@ -10,5 +10,5 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
 
     Activity getActivityByDate(Long date);
 
-    void delete(Activity activity);
+
 }
