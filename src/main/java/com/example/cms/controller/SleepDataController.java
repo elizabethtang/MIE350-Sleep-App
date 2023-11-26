@@ -14,30 +14,33 @@ import java.util.Random;
 public class SleepDataController {
     @Autowired
     private final SleepDataRepository repository;
+    private final EmailController emailController;
     private RecommendationController recommendationController;
 
-    public SleepDataController(SleepDataRepository repository) {
-
+    public SleepDataController(SleepDataRepository repository, EmailController emailController) {
         this.repository = repository;
+        this.emailController = emailController;
     }
-
 
     @PostMapping("/sleep/create/{username}")
     public String addSleep(@PathVariable("username") String username, @RequestBody SleepData sleepData) {
         // Add new sleep data
         Random random = new Random();
+
         // Generate a random long value
         long sleepDataId = random.nextLong();
         sleepData.setSleepDataId(sleepDataId);
         SleepData data = repository.save(sleepData);
+
         //create new recommendation
         int sleepRecommendation = calculateSleepRecommendation();
         Recommendation recommendation = recommendationController.create(sleepData.getUser(), sleepRecommendation);
-//        EmailController.sendEmailWithRecommendation(sleepData.getUser().getEmail(), sleepData, recommendation);
+
+        // send email
+        emailController.sendEmailWithRecommendation(sleepData.getUser().getEmail(), sleepData, recommendation);
+
         return "Sleep data saved successfully";
     }
-
-
 
     private int calculateSleepRecommendation() {
         return 8;
