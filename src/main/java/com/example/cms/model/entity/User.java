@@ -45,7 +45,7 @@ public class User {
     @NotEmpty
     private String password;
 
-    @NotEmpty
+    @Nullable
     private Boolean emailToggle;
 /*
     @OneToMany(mappedBy = "user")
