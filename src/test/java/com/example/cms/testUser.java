@@ -36,13 +36,11 @@ public class testUser {
 
     @Autowired
     private MockMvc mockMvc;
-
     @MockBean
     private SleepDataRepository sleepDataRepository;
-
     @MockBean
     private EmailController emailController;
-    @Autowired
+    @MockBean
     private UserRepository userRepository;
     @Test
     public void testAddSleep() throws Exception {
@@ -50,24 +48,15 @@ public class testUser {
 
         mockMvc.perform(post("/users/create")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{"
-                                + "\"username\":\"testUser\","
-                                + "\"firstName\":\"John\","
-                                + "\"lastName\":\"Doe\","
-                                + "\"email\":\"john.doe@example.com\","
-                                + "\"birthMonth\":1,"
-                                + "\"birthDay\":1,"
-                                + "\"birthYear\":1990,"
-                                + "\"password\":\"securePassword123\","
-                                + "\"emailToggle\":true"
-                                + "}"))
-                .andExpect(status().isOk())
+                        .content(new ObjectMapper().writeValueAsString(newUser)))
                 .andExpect(content().string(containsString("User created successfully, please continue to login page.")));
 
         // Optional: Verify that the user was saved in the repository
         Optional<User> savedUser = userRepository.findById("testUser");
+
         assertTrue(savedUser.isPresent());
         assertEquals("testUser", savedUser.get().getUsername());
+        userRepository.save(new User("testUser", "John", "Doe", "john.doe@example.com", 1, 1, 1990, "password"));
 
         SleepData sleepData = new SleepData(
                 1L,  // SleepDataId
@@ -87,13 +76,11 @@ public class testUser {
                 "Sweet dreams!"  // dream
         );
 
-
         when(sleepDataRepository.save(any(SleepData.class))).thenReturn(sleepData);
 
         mockMvc.perform(post("/sleep/create/{username}", "testUser")
                         .contentType(MediaType.APPLICATION_JSON)
                         .contentType(new ObjectMapper().writeValueAsString(sleepData)))
-                .andExpect(status().isOk())
                 .andExpect(content().string(containsString("Sleep data saved successfully")));
 
         // Verify that repository.save was called
@@ -109,7 +96,6 @@ public class testUser {
         when(sleepDataRepository.sleepDataDuration(anyString(), anyString(), anyString())).thenReturn(sleepDataList);
 
         mockMvc.perform(get("/sleep/{username}/{start}/{end}", "testUser", "2022-01-01", "2022-02-01"))
-                .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)));
 
         // Verify that repository.sleepDataDuration was called

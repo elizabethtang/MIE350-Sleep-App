@@ -5,6 +5,8 @@ import com.example.cms.model.entity.Recommendation;
 import com.example.cms.model.entity.SleepData;
 import com.example.cms.model.repository.SleepDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Random;
@@ -23,23 +25,28 @@ public class SleepDataController {
     }
 
     @PostMapping("/sleep/create/{username}")
-    public String addSleep(@PathVariable("username") String username, @RequestBody SleepData sleepData) {
-        // Add new sleep data
-        Random random = new Random();
+    public ResponseEntity<String> addSleep(@PathVariable("username") String username, @RequestBody SleepData sleepData) {
+        try {
+            // Add new sleep data
+            Random random = new Random();
 
-        // Generate a random long value
-        long sleepDataId = random.nextLong();
-        sleepData.setSleepDataId(sleepDataId);
-        SleepData data = repository.save(sleepData);
+            // Generate a random long value
+            long sleepDataId = random.nextLong();
+            sleepData.setSleepDataId(sleepDataId);
+            SleepData data = repository.save(sleepData);
 
-        //create new recommendation
-        int sleepRecommendation = calculateSleepRecommendation();
-        Recommendation recommendation = recommendationController.create(sleepData.getUser(), sleepRecommendation);
+            // create new recommendation
+            int sleepRecommendation = calculateSleepRecommendation();
+            Recommendation recommendation = recommendationController.create(sleepData.getUser(), sleepRecommendation);
 
-        // send email
-        emailController.sendEmailWithRecommendation(sleepData.getUser().getEmail(), sleepData, recommendation);
+            // send email
+            emailController.sendEmailWithRecommendation(sleepData.getUser().getEmail(), sleepData, recommendation);
 
-        return "Sleep data saved successfully";
+            return ResponseEntity.ok("Sleep data saved successfully");
+        } catch (Exception e) {
+            // Handle exceptions and return an appropriate response
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error saving sleep data: " + e.getMessage());
+        }
     }
 
     private int calculateSleepRecommendation() {

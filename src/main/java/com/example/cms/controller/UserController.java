@@ -26,14 +26,14 @@ public class UserController {
 
     @PostMapping("/users/create")
     public String createUser(@RequestBody User newUser) {
-        //if username already exists return this
         if (repository.existsByUsername(newUser.getUsername()) > 0) {
             throw new UserAlreadyExistsException();
         }
-        // Save the new user to the repository
+
         User savedUser = repository.save(newUser);
         return "User created successfully, please continue to login page.";
     }
+
 
     @GetMapping("/users/{username}/{password}")
     User retrieveUser(@PathVariable("username") String username, @PathVariable("password") String password) {
