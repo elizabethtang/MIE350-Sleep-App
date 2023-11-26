@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -17,14 +18,17 @@ public interface SleepDataRepository extends JpaRepository<SleepData, Long> {
     @Query(value = "SELECT * FROM sleepDatas s " +
             "INNER JOIN users u ON s.user_Username = u.username " +
             "WHERE u.username = :username " +
-            "AND PARSEDATETIME(CONCAT(s.startDay, '/', s.startMonth, '/', s.startYear), 'd/M/yyyy') >= PARSEDATETIME(:start, 'd/M/yyyy') " +
-            "AND PARSEDATETIME(CONCAT(s.endDay, '/', s.endMonth, '/', s.endYear), 'd/M/yyyy') <= PARSEDATETIME(:end, 'd/M/yyyy')",
+            "AND PARSEDATETIME(CONCAT(s.startYear, '-', LPAD(s.startMonth, 2, '0'), '-', LPAD(s.startDay, 2, '0')), 'yyyy-MM-dd') >= :startDate " +
+            "AND PARSEDATETIME(CONCAT(s.endYear, '-', LPAD(s.endMonth, 2, '0'), '-', LPAD(s.endDay, 2, '0')), 'yyyy-MM-dd') <= :endDate",
             nativeQuery = true)
     List<SleepData> sleepDataDuration(
             @Param("username") String username,
-            @Param("start") String start,
-            @Param("end") String end
+            @Param("startDate") LocalDate startDate,
+            @Param("endDate") LocalDate endDate
     );
+
+
+
 
 
 

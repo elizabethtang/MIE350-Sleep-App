@@ -12,10 +12,12 @@ import java.util.List;
 public interface RecommendationRepository extends JpaRepository< Recommendation, Long> {
     //TODO
 
-    @Query(value = "select * from recommendations where " +
-            "recommendationId = (SELECT max(r.recommendationId) FROM RECOMMENDATIONS r INNER JOIN USERS u ON u.username = r.username where "
-            + "u.username = '%', :searchTerm, '%')"
+    @Query(value = "SELECT * FROM recommendations r " +
+            "WHERE r.recommendationId = (SELECT MAX(rr.recommendationId) " +
+            "                             FROM recommendations rr " +
+            "                             INNER JOIN users u ON u.username = rr.username " +
+            "                             WHERE u.username LIKE %:searchTerm%)"
             , nativeQuery = true)
-    List<Recommendation> getRecentRecommendation(@Param("searchTerm") String searchTerm);
+    Recommendation getRecentRecommendation(@Param("searchTerm") String searchTerm);
 }
 

@@ -28,7 +28,7 @@ public class RecommendationController {
     }
 
     @GetMapping("/recommendation/{username}")
-    public List<Recommendation> getRecommendation(@PathVariable("username") String username) {
+    public Recommendation getRecommendation(@PathVariable("username") String username) {
         //give most recent recommendation
         return repository.getRecentRecommendation(username);
     }

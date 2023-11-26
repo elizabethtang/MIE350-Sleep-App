@@ -5,11 +5,13 @@ import com.example.cms.model.entity.Recommendation;
 import com.example.cms.model.entity.SleepData;
 import com.example.cms.model.repository.SleepDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -64,11 +66,9 @@ public class SleepDataController {
     @GetMapping("/sleep/{username}/{start}/{end}")
     List<SleepData> getSleepData(
             @PathVariable("username") String username,
-            @PathVariable("start") String start,
-            @PathVariable("end") String end) {
-        // start date DD/MM/YY
-        // end date DD/MM/YY
-        List<SleepData> sleepDataList = repository.sleepDataDuration(username, start, end);
+            @PathVariable("start") @DateTimeFormat(pattern = "ddMMyyyy") LocalDate startDate,
+            @PathVariable("end") @DateTimeFormat(pattern = "ddMMyyyy") LocalDate endDate) {
+        List<SleepData> sleepDataList = repository.sleepDataDuration(username, startDate, endDate);
         if (sleepDataList.isEmpty()) {
             throw new SleepDataNotFoundException(username);
         }
