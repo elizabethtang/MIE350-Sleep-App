@@ -3,41 +3,29 @@ package com.example.cms.model.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import java.util.ArrayList;
-import java.util.List;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @NoArgsConstructor
 @Getter
 @Setter
 @Table(name = "recommendations")
-
 public class Recommendation {
     @Id
-    @NotEmpty
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long recommendationId;
 
-    @NotEmpty
+    @NotNull
     private int sleepAmount;
 
     @ManyToOne
-    @JoinColumn(name="username")
+    @JoinColumn(name = "username")
     private User appUser;
 
-
-
-
-
-
-
-    public Recommendation(Long Id, int sleepAmount, User appUser){
-        this.recommendationId = Id;
+    public Recommendation(int sleepAmount, User appUser) {
         this.sleepAmount = sleepAmount;
         this.appUser = appUser;
     }
-
 }

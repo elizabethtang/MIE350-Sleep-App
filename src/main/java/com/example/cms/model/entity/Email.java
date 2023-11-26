@@ -7,15 +7,12 @@ import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @NoArgsConstructor
 @Getter
 @Setter
 @Table(name = "emailMessages")
-//TODO
 public class Email {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,12 +25,11 @@ public class Email {
     @JoinColumn(name = "username")
     private User appUser;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL) // Specify the cascade type as needed
     @JoinColumn(name = "recommendationId")
     private Recommendation recommendation;
 
-    public Email(Long emailMessageId, String emailMessage, User appUser, Recommendation recommendation) {
-        this.emailMessageId = emailMessageId;
+    public Email(String emailMessage, User appUser, Recommendation recommendation) {
         this.emailMessage = emailMessage;
         this.appUser = appUser;
         this.recommendation = recommendation;

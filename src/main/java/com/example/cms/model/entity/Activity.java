@@ -1,6 +1,5 @@
 package com.example.cms.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,7 +9,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-
 @Entity
 @NoArgsConstructor
 @Getter
@@ -19,38 +17,37 @@ import javax.validation.constraints.NotNull;
 public class Activity {
 
     @Id
-    @NotEmpty
-    private Long ActivityID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long activityID;
 
     @ManyToOne
-    @JoinColumn(name="user_Username")
+    @JoinColumn(name = "user_Username")
     private User user;
 
     @NotNull
-    private int time; //how much time an activity took
+    private int time; // how much time an activity took
 
     @NotNull
-    private int date; //date displayed in the YYYYMMDD form (so that the latest date is always the greatest number)
+    private int date; // date displayed in the YYYYMMDD form (so that the latest date is always the greatest number)
 
-    @Nullable
+    @NotEmpty
     private String userFeel; // how the user feels after the activity happened
 
     // the next set of variables are dependent on what kind of activity a user is logging and are therefore nullable
     // for example, a user doesn't have to intake caffeine for it to count as an activity (can instead burn calories)
     @Nullable
-    private int caffeineIntake;
+    private Integer caffeineIntake;
 
     @Nullable
-    private int calorieIntake;
+    private Integer calorieIntake;
 
     @Nullable
-    private int calorieBurn;
+    private Integer calorieBurn;
 
     @Nullable
     private String activitiesForToday;
 
-    public Activity(Long ActivityID, User user, int time, int date , String userFeel, int caffeineIntake, int calorieBurn, int calorieIntake, String activitiesForToday){
-        this.ActivityID = ActivityID;
+    public Activity(User user, int time, int date, String userFeel, Integer caffeineIntake, Integer calorieBurn, Integer calorieIntake, String activitiesForToday) {
         this.user = user;
         this.time = time;
         this.date = date;
@@ -60,6 +57,4 @@ public class Activity {
         this.activitiesForToday = activitiesForToday;
         this.calorieIntake = calorieIntake;
     }
-
 }
-

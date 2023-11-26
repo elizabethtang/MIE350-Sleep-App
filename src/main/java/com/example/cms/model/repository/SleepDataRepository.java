@@ -14,16 +14,23 @@ public interface SleepDataRepository extends JpaRepository<SleepData, Long> {
     //TODO
 // SleepDataRepository interface
 
-    @Query(value = "SELECT * FROM sleep_data s " +
-            "INNER JOIN users u ON s.user_id = u.id " +
+    @Query(value = "SELECT * FROM sleepDatas s " +
+            "INNER JOIN users u ON s.user_Username = u.username " +
             "WHERE u.username = :username " +
-            "AND STR_TO_DATE(s.start_date, '%d/%m/%y') >= STR_TO_DATE(:start, '%d/%m/%y') " +
-            "AND STR_TO_DATE(s.end_date, '%d/%m/%y') <= STR_TO_DATE(:end, '%d/%m/%y')", nativeQuery = true)
+            "AND PARSEDATETIME(CONCAT(s.startDay, '/', s.startMonth, '/', s.startYear), 'd/M/yyyy') >= PARSEDATETIME(:start, 'd/M/yyyy') " +
+            "AND PARSEDATETIME(CONCAT(s.endDay, '/', s.endMonth, '/', s.endYear), 'd/M/yyyy') <= PARSEDATETIME(:end, 'd/M/yyyy')",
+            nativeQuery = true)
     List<SleepData> sleepDataDuration(
             @Param("username") String username,
             @Param("start") String start,
             @Param("end") String end
     );
+
+
+
+
+
+
 
     @Query(value = "select * from (USERS u INNER JOIN sleepDatas s ON u.username = s.user_Username) where " +
             "ActivityID = '%', :sleepDataId, '%' AND user_Username = '%', :username, '%' ", nativeQuery = true)

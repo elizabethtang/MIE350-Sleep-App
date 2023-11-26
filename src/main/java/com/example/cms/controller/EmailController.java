@@ -13,15 +13,16 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class EmailController {
     @Autowired
-    private static EmailService emailService;
+    private EmailService emailService;
     @Autowired
     private final UserRepository repository;
     @Autowired
     private final EmailRepository emailRepository;
 
-    public EmailController(UserRepository repository, EmailRepository emailRepository) {
+    public EmailController(UserRepository repository, EmailRepository emailRepository, EmailService emailService) {
         this.repository = repository;
         this.emailRepository = emailRepository;
+        this.emailService = emailService;
     }
 
     @PostMapping("/emailToggle/{username}")
@@ -37,7 +38,7 @@ public class EmailController {
         String body = "New sleep data: " + sleepData.getSleepDetails() +
                 "\nSleep Recommendation: " + recommendation.getSleepAmount();
 
-        Email email = new Email(null, body, sleepData.getUser(), recommendation);
+        Email email = new Email(body, sleepData.getUser(), recommendation);
 
         emailRepository.save(email);
         emailService.sendEmail(to, subject, body);

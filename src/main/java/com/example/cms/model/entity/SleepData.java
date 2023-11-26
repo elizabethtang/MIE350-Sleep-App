@@ -1,16 +1,13 @@
 package com.example.cms.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.text.MessageFormat;
-
 
 @Entity
 @NoArgsConstructor
@@ -20,14 +17,12 @@ import java.text.MessageFormat;
 public class SleepData {
 
     @Id
-    @NotEmpty
-    private Long SleepDataId;
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long sleepDataId;
 
     @ManyToOne
     @JoinColumn(name = "user_Username")
     private User user;
-
 
     @NotNull
     private int startHour;
@@ -42,7 +37,7 @@ public class SleepData {
     private int endMinute;
 
     @NotNull
-    private int startDay; // account for 31 - 1
+    private int startDay;
 
     @NotNull
     private int endDay;
@@ -66,10 +61,9 @@ public class SleepData {
     private int endTiredness;
 
     @Nullable
-    private String Dream; // user doesn't have to put any dream notes
+    private String dream;
 
-    public SleepData(Long SleepDataId, User user, int startHour, int startMinute, int endHour, int endMinute, int startDay, int endDay, int startMonth, int endMonth, int startYear, int endYear, int startTiredness, int endTiredness, String dream) {
-        this.SleepDataId = SleepDataId;
+    public SleepData(User user, int startHour, int startMinute, int endHour, int endMinute, int startDay, int endDay, int startMonth, int endMonth, int startYear, int endYear, int startTiredness, int endTiredness, String dream) {
         this.user = user;
         this.startHour = startHour;
         this.startMinute = startMinute;
@@ -83,9 +77,7 @@ public class SleepData {
         this.endYear = endYear;
         this.startTiredness = startTiredness;
         this.endTiredness = endTiredness;
-        this.Dream = dream;
-
-
+        this.dream = dream;
     }
 
     public String getSleepDetails() {
@@ -102,16 +94,15 @@ public class SleepData {
 
         return MessageFormat.format(
                 template,
-                SleepDataId,
-                user,
+                sleepDataId,
+                user.getUsername(),
                 startHour, startMinute,
                 endHour, endMinute,
                 startDay, startMonth, startYear,
                 endDay, endMonth, endYear,
                 startTiredness,
                 endTiredness,
-                Dream
+                dream
         );
     }
 }
-

@@ -23,27 +23,23 @@ public class ActivityController {
     @PostMapping("/activity/{username}")
     public String addSleep(@PathVariable("username") String username, @RequestBody Activity activity) {
         // Add new sleep data
-        Random random = new Random();
         // Generate a random long value
-        long activityId = random.nextLong();
-        activity.setActivityID(activityId);
         Activity data = repository.save(activity);
         return "Activity saved successfully";
     }
 
-    //FIX THIS
-    @GetMapping("/activity/{username}/{date}")
-    List<Activity> getActivity(
-            @PathVariable("username") String username,
-            @PathVariable("startDate") int startDate,
-            @PathVariable("endDate") int endDate) {
-        // date YYYYMMDD
-        List<Activity> activityList = repository.activityDuration(username, startDate, endDate);
-        if (activityList.isEmpty()) {
-            throw new ActivityNotFoundException("No activities for this day");
-        }
-        return activityList;
-    }
+    //TODO
+//    @GetMapping("/activity/{username}/{date}")
+//    List<Activity> getActivity(
+//            @PathVariable("username") String username,
+//            @PathVariable("date") int date) {
+//        // date YYYYMMDD
+//        List<Activity> activityList = repository.activityDuration(username, startDate, endDate);
+//        if (activityList.isEmpty()) {
+//            throw new ActivityNotFoundException("No activities for this day");
+//        }
+//        return activityList;
+//    }
 
 
     @GetMapping("/activity/{username}/{activityId}")

@@ -21,10 +21,8 @@ public class RecommendationController {
     }
 
     public Recommendation create(User user, int sleepRecommendation) {
-        Random random = new Random();
         // Generate a random long value
-        long recommendationId = random.nextLong();
-        Recommendation recommendation = new Recommendation(recommendationId, sleepRecommendation, user);
+        Recommendation recommendation = new Recommendation(sleepRecommendation, user);
         Recommendation newRecommendation = repository.save(recommendation);
         return recommendation;
     }
