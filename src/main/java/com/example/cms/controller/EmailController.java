@@ -37,7 +37,8 @@ public class EmailController {
         repository.save(user);
         return enable;
     }
-    static void sendEmailWithRecommendation(String to, SleepData sleepData, Recommendation recommendation) {
+
+    void sendEmailWithRecommendation(String to, SleepData sleepData, Recommendation recommendation) {
         String subject = "Sleep Data and Recommendation Update";
         String body = "New sleep data: " + sleepData.getSleepDetails() +
                 "\nSleep Recommendation: " + recommendation.getSleepAmount();

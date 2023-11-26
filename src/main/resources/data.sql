@@ -5,4 +5,5 @@ INSERT INTO sleepDatas (SleepDataId, user_Username, startHour, startMinute,  end
 INSERT INTO activityData (ActivityID, user_Username, time, date, userFeel, caffeineIntake, calorieBurn, calorieIntake, activitiesForToday)
 VALUES (654654, 'bruh', 1, 2, 'idk', 11, 13, 12, 'Some activities for today');
 
-INSERT INTO emailMessages (emailMessageId, username, recommendationID, emailMessage, activityID) VALUES (7778, 'bruh', 11111, 'hello World kinda thing', 654654);
+INSERT INTO emailMessages (emailMessageId, username, recommendationID, emailMessage)
+VALUES (7778, 'bruh', 11111, 'hello World kinda thing');

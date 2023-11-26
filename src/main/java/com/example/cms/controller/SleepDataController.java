@@ -33,8 +33,7 @@ public class SleepDataController {
         //create new recommendation
         int sleepRecommendation = calculateSleepRecommendation();
         Recommendation recommendation = recommendationController.create(sleepData.getUser(), sleepRecommendation);
-
-        EmailController.sendEmailWithRecommendation(sleepData.getUser().getEmail(), sleepData, recommendation);
+//        EmailController.sendEmailWithRecommendation(sleepData.getUser().getEmail(), sleepData, recommendation);
         return "Sleep data saved successfully";
     }
 
