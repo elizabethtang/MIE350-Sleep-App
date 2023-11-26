@@ -8,26 +8,20 @@ import com.example.cms.model.repository.EmailRepository;
 import com.example.cms.model.repository.UserRepository;
 import com.example.cms.model.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @RestController
 public class EmailController {
-
     @Autowired
     private static EmailService emailService;
     @Autowired
     private final UserRepository repository;
-
     @Autowired
     private final EmailRepository emailRepository;
 
     public EmailController(UserRepository repository, EmailRepository emailRepository) {
-            this.repository = repository;
-            this.emailRepository = emailRepository;
+        this.repository = repository;
+        this.emailRepository = emailRepository;
     }
 
     @PostMapping("/emailToggle/{username}")
