@@ -21,7 +21,6 @@ public class RecommendationController {
     }
 
     public Recommendation create(User user, int sleepRecommendation) {
-        // Generate a random long value
         Recommendation recommendation = new Recommendation(sleepRecommendation, user);
         Recommendation newRecommendation = repository.save(recommendation);
         return recommendation;
@@ -32,7 +31,5 @@ public class RecommendationController {
         //give most recent recommendation
         return repository.getRecentRecommendation(username);
     }
-
-
 
 }

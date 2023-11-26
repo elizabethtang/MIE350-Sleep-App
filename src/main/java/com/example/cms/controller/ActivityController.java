@@ -1,11 +1,15 @@
 package com.example.cms.controller;
 
 import com.example.cms.controller.exceptions.ActivityNotFoundException;
+import com.example.cms.controller.exceptions.SleepDataNotFoundException;
 import com.example.cms.model.entity.Activity;
+import com.example.cms.model.entity.SleepData;
 import com.example.cms.model.repository.ActivityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Random;
 
@@ -42,12 +46,18 @@ public class ActivityController {
 //    }
 
 
-    @GetMapping("/activity/{username}/{activityId}")
-    Activity getActivity
-            (@PathVariable("username") String username, @PathVariable("activityId") Long
-                    activityId) {
-        Activity activity = repository.getReferenceById(activityId);
+    @GetMapping("/activity/{username}/{start}/{end}")
+    List<Activity> getActivity(@PathVariable("username") String username,
+                               @PathVariable("start") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate,
+                               @PathVariable("end") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate) {
+        // Assuming you have a method to find the activity by username and date in the repository
+        List<Activity> activity = repository.activityDuration(username, startDate, endDate);
 
+        // Check if the activity is found
+        if (activity == null) {
+            // Handle the case when the activity is not found
+            throw new ActivityNotFoundException(username);
+        }
         return activity;
     }
 
@@ -61,7 +71,4 @@ public class ActivityController {
         repository.delete(activity);
         return "Successfully deleted activity!";
     }
-
-
-
 }

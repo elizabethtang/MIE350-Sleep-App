@@ -19,5 +19,6 @@ public interface RecommendationRepository extends JpaRepository< Recommendation,
             "                             WHERE u.username LIKE %:searchTerm%)"
             , nativeQuery = true)
     Recommendation getRecentRecommendation(@Param("searchTerm") String searchTerm);
+
 }
 

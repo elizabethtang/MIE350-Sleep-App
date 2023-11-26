@@ -25,8 +25,8 @@ public class EmailController {
         this.emailService = emailService;
     }
 
-    @PostMapping("/emailToggle/{username}")
-    public boolean toggleEmailFunctionality(@PathVariable String username, @RequestParam boolean enable) {
+    @PostMapping("/emailToggle/{username}/{enable}")
+    public boolean toggleEmailFunctionality(@PathVariable String username, @PathVariable boolean enable) {
         User user = repository.getReferenceById(username);
         user.setEmailToggle(enable);
         repository.save(user);

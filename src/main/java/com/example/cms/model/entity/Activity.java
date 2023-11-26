@@ -8,6 +8,7 @@ import org.springframework.lang.Nullable;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
 @Entity
 @NoArgsConstructor
@@ -28,7 +29,7 @@ public class Activity {
     private int time; // how much time an activity took
 
     @NotNull
-    private int date; // date displayed in the YYYYMMDD form (so that the latest date is always the greatest number)
+    private LocalDate date; // date displayed in the YYYYMMDD form (so that the latest date is always the greatest number)
 
     @NotEmpty
     private String userFeel; // how the user feels after the activity happened
@@ -47,7 +48,7 @@ public class Activity {
     @Nullable
     private String activitiesForToday;
 
-    public Activity(User user, int time, int date, String userFeel, Integer caffeineIntake, Integer calorieBurn, Integer calorieIntake, String activitiesForToday) {
+    public Activity(User user, int time, LocalDate date, String userFeel, Integer caffeineIntake, Integer calorieBurn, Integer calorieIntake, String activitiesForToday) {
         this.user = user;
         this.time = time;
         this.date = date;
@@ -58,3 +59,4 @@ public class Activity {
         this.calorieIntake = calorieIntake;
     }
 }
+
