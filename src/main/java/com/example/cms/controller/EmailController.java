@@ -1,51 +1,50 @@
-//TODO
-//package com.example.cms.controller;
-//
-//import com.example.cms.model.entity.SleepData;
-//import com.example.cms.model.repository.EmailRepository;
-//import com.example.cms.model.service.EmailService;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.http.HttpStatus;
-//import org.springframework.http.ResponseEntity;
-//import org.springframework.web.bind.annotation.*;
-//
-//@RestController
-//@RequestMapping("/email")
-//@CrossOrigin
-//public class EmailController {
-//
-//    private final EmailRepository repository;
-//
-//    @Autowired
-//    private EmailService emailService;
-//
-//    private boolean emailEnabled = true; // Variable to control email functionality
-//
-//    public EmailController(EmailRepository repository) {
-//        this.repository = repository;
-//    }
-//
-//    @PostMapping("/toggle")
-//    public ResponseEntity<String> toggleEmailFunctionality(@RequestParam boolean enable) {
-//        emailEnabled = enable;
-//        String status = emailEnabled ? "Email functionality is enabled." : "Email functionality is disabled.";
-//        return new ResponseEntity<>(status, HttpStatus.OK);
-//    }
-//
-//    @PostMapping("/sendSleepUpdate")
-//    public ResponseEntity<String> sendSleepUpdateEmail(@RequestBody SleepData sleepData) {
-//        if (emailEnabled) {
-//            // Prepare email content based on sleep data
-//            String to = sleepData.getAppUser().getEmail(); // Assuming User has an email property
-//            String subject = "Sleep Data Update";
-//            String body = "New sleep data: " + sleepData.getSleepDetails();
-//
-//            // Send email using the EmailService
-//            emailService.sendEmail(to, subject, body);
-//
-//            return new ResponseEntity<>("Email sent successfully.", HttpStatus.OK);
-//        } else {
-//            return new ResponseEntity<>("Email functionality is disabled.", HttpStatus.OK);
-//        }
-//    }
-//}
+package com.example.cms.controller;
+
+import com.example.cms.model.entity.Email;
+import com.example.cms.model.entity.Recommendation;
+import com.example.cms.model.entity.SleepData;
+import com.example.cms.model.entity.User;
+import com.example.cms.model.repository.EmailRepository;
+import com.example.cms.model.repository.UserRepository;
+import com.example.cms.model.service.EmailService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
+
+@RestController
+public class EmailController {
+
+    @Autowired
+    private static EmailService emailService;
+    @Autowired
+    private final UserRepository repository;
+
+    @Autowired
+    private final EmailRepository emailRepository;
+
+    public EmailController(UserRepository repository, EmailRepository emailRepository) {
+            this.repository = repository;
+            this.emailRepository = emailRepository;
+    }
+
+    @PostMapping("/emailToggle/{username}")
+    public boolean toggleEmailFunctionality(@PathVariable String username, @RequestParam boolean enable) {
+        User user = repository.getReferenceById(username);
+        user.setEmailToggle(enable);
+        repository.save(user);
+        return enable;
+    }
+    static void sendEmailWithRecommendation(String to, SleepData sleepData, Recommendation recommendation) {
+        String subject = "Sleep Data and Recommendation Update";
+        String body = "New sleep data: " + sleepData.getSleepDetails() +
+                "\nSleep Recommendation: " + recommendation.getSleepAmount();
+
+        Email email = new Email(null, body, sleepData.getUser(), recommendation);
+
+        emailRepository.save(email);
+        emailService.sendEmail(to, subject, body);
+    }
+}

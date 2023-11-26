@@ -32,14 +32,13 @@ public class ActivityController {
     }
 
     //FIX THIS
-    @GetMapping("/activity/{username}/{start}/{end}")
+    @GetMapping("/activity/{username}/{date}")
     List<Activity> getActivity(
             @PathVariable("username") String username,
-            @PathVariable("start") String start,
-            @PathVariable("end") String end) {
-        // start date DD/MM/YY
-        // end date DD/MM/YY
-        List<Activity> activityList = repository.activityDuration(username, start, end);
+            @PathVariable("startDate") int startDate,
+            @PathVariable("endDate") int endDate) {
+        // date YYYYMMDD
+        List<Activity> activityList = repository.activityDuration(username, startDate, endDate);
         if (activityList.isEmpty()) {
             throw new ActivityNotFoundException("No activities for this day");
         }
@@ -56,6 +55,8 @@ public class ActivityController {
         return activity;
     }
 
+
+
     @DeleteMapping("/activity/{username}/{activityId}")
     public String deleteActivity(
             @PathVariable("username") String username,
@@ -64,4 +65,7 @@ public class ActivityController {
         repository.delete(activity);
         return "Successfully deleted activity!";
     }
+
+
+
 }

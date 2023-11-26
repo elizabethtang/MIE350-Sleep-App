@@ -1,12 +1,13 @@
 package com.example.cms.controller;
 
-import com.example.cms.controller.exceptions.RecommendationNotFoundException;
+import com.example.cms.model.entity.Email;
 import com.example.cms.model.entity.Recommendation;
 import com.example.cms.model.entity.User;
 import com.example.cms.model.repository.RecommendationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Random;
 
 @CrossOrigin
@@ -19,23 +20,19 @@ public class RecommendationController {
         this.repository = repository;
     }
 
-    public void create(User user, int sleepRecommendation) {
+    public Recommendation create(User user, int sleepRecommendation) {
         Random random = new Random();
         // Generate a random long value
         long recommendationId = random.nextLong();
         Recommendation recommendation = new Recommendation(recommendationId, sleepRecommendation, user);
         Recommendation newRecommendation = repository.save(recommendation);
+        return recommendation;
     }
 
     @GetMapping("/recommendation/{username}")
-    public Recommendation getRecommendation(@PathVariable("username") String username) {
+    public List<Recommendation> getRecommendation(@PathVariable("username") String username) {
         //give most recent recommendation
-        Recommendation recommendation = repository.getRecentRecommendation(username);
-
-        if (recommendation == null) {
-            throw new RecommendationNotFoundException(username);
-        }
-        return recommendation;
+        return repository.getRecentRecommendation(username);
     }
 
 

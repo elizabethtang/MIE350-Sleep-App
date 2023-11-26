@@ -1,11 +1,11 @@
 package com.example.cms.controller;
 
 import com.example.cms.controller.exceptions.SleepDataNotFoundException;
+import com.example.cms.model.entity.Recommendation;
 import com.example.cms.model.entity.SleepData;
 import com.example.cms.model.repository.SleepDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Random;
 
@@ -32,9 +32,13 @@ public class SleepDataController {
         SleepData data = repository.save(sleepData);
         //create new recommendation
         int sleepRecommendation = calculateSleepRecommendation();
-        recommendationController.create(sleepData.getUser(), sleepRecommendation);
+        Recommendation recommendation = recommendationController.create(sleepData.getUser(), sleepRecommendation);
+
+        EmailController.sendEmailWithRecommendation(sleepData.getUser().getEmail(), sleepData, recommendation);
         return "Sleep data saved successfully";
     }
+
+
 
     private int calculateSleepRecommendation() {
         return 8;
@@ -53,6 +57,7 @@ public class SleepDataController {
         }
         return sleepDataList;
     }
+
 
     @GetMapping("/sleep/{username}/{sleepDataId}")
     SleepData getSleepData

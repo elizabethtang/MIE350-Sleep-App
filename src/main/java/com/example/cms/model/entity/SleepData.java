@@ -9,6 +9,7 @@ import org.springframework.lang.Nullable;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.text.MessageFormat;
 
 
 @Entity
@@ -23,11 +24,9 @@ public class SleepData {
     private Long SleepDataId;
 
 
-
     @ManyToOne
-    @JoinColumn(name="user_Username")
+    @JoinColumn(name = "user_Username")
     private User user;
-
 
 
     @NotNull
@@ -69,8 +68,7 @@ public class SleepData {
     @Nullable
     private String Dream; // user doesn't have to put any dream notes
 
-    
-    public SleepData(Long SleepDataId, User user, int startHour, int startMinute,  int endHour, int endMinute,  int startDay, int endDay, int startMonth, int endMonth, int startYear, int endYear, int startTiredness, int endTiredness, String dream){
+    public SleepData(Long SleepDataId, User user, int startHour, int startMinute, int endHour, int endMinute, int startDay, int endDay, int startMonth, int endMonth, int startYear, int endYear, int startTiredness, int endTiredness, String dream) {
         this.SleepDataId = SleepDataId;
         this.user = user;
         this.startHour = startHour;
@@ -86,12 +84,34 @@ public class SleepData {
         this.startTiredness = startTiredness;
         this.endTiredness = endTiredness;
         this.Dream = dream;
-        
-        
 
-        
+
     }
 
+    public String getSleepDetails() {
+        String template = "Sleep Data:\n" +
+                "SleepDataId: {0}\n" +
+                "User: {1}\n" +
+                "Start Time: {2}:{3}\n" +
+                "End Time: {4}:{5}\n" +
+                "Start Date: {6}/{7}/{8}\n" +
+                "End Date: {9}/{10}/{11}\n" +
+                "Start Tiredness: {12}\n" +
+                "End Tiredness: {13}\n" +
+                "Dream: {14}";
 
+        return MessageFormat.format(
+                template,
+                SleepDataId,
+                user,
+                startHour, startMinute,
+                endHour, endMinute,
+                startDay, startMonth, startYear,
+                endDay, endMonth, endYear,
+                startTiredness,
+                endTiredness,
+                Dream
+        );
+    }
 }
 

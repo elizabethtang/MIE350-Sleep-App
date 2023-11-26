@@ -19,7 +19,7 @@ public interface UserRepository extends JpaRepository<User, String> {
     @Query(value = "select * from users u " +
             "where lower(u.username) like lower(concat('%', :username, '%')) " +
             "and lower(u.password) like lower(concat('%', :password, '%'))", nativeQuery = true)
-    User findById(String username, String password);
+    User findByUserPass(String username, String password);
 
     @Query(value = "SELECT COUNT(*) FROM users u WHERE lower(u.username) = lower(:username)", nativeQuery = true)
     int existsByUsername(@Param("username") String username);

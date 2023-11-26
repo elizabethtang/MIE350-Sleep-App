@@ -37,7 +37,7 @@ public class UserController {
 
     @GetMapping("/users/{username}/{password}")
     User retrieveUser(@PathVariable("username") String username, @PathVariable("password") String password) {
-        User user = repository.findById(username, password);
+        User user = repository.findByUserPass(username, password);
 
         if (user == null) {
             throw new UserNotFoundException(username);

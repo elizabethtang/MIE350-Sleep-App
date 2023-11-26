@@ -18,33 +18,24 @@ import java.util.List;
 //TODO
 public class Email {
     @Id
-    @NotEmpty
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long emailMessageId;
 
     @NotEmpty
     private String emailMessage;
 
     @ManyToOne
-    @JoinColumn(name="username")
+    @JoinColumn(name = "username")
     private User appUser;
 
     @OneToOne
     @JoinColumn(name = "recommendationId")
     private Recommendation recommendation;
 
-
-
-
-
-
-
-
-
-    public Email(Long emailMessageId, int sleepAmount, String emailMessage, User appUser, Recommendation recommendation, Activity activity){
+    public Email(Long emailMessageId, String emailMessage, User appUser, Recommendation recommendation) {
         this.emailMessageId = emailMessageId;
         this.emailMessage = emailMessage;
         this.appUser = appUser;
         this.recommendation = recommendation;
     }
-
 }

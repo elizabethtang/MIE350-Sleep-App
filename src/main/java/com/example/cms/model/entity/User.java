@@ -45,6 +45,8 @@ public class User {
     @NotEmpty
     private String password;
 
+    @NotEmpty
+    private Boolean emailToggle;
 /*
     @OneToMany(mappedBy = "user")
     @Nullable
@@ -64,7 +66,6 @@ public class User {
         this.birthDay = day;
         this.birthYear = year;
         this.password = pass;
+        this.emailToggle = true;
     }
-
-
 }
