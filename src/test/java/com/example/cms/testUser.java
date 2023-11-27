@@ -59,7 +59,6 @@ public class testUser {
         userRepository.save(new User("testUser", "John", "Doe", "john.doe@example.com", 1, 1, 1990, "password"));
 
         SleepData sleepData = new SleepData(
-                1L,  // SleepDataId
                 newUser,
                 22,  // startHour
                 30,  // startMinute
