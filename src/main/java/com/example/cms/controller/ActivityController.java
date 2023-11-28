@@ -1,9 +1,7 @@
 package com.example.cms.controller;
 
 import com.example.cms.controller.exceptions.ActivityNotFoundException;
-import com.example.cms.controller.exceptions.SleepDataNotFoundException;
 import com.example.cms.model.entity.Activity;
-import com.example.cms.model.entity.SleepData;
 import com.example.cms.model.repository.ActivityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -11,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Random;
 
 @CrossOrigin
 @RestController

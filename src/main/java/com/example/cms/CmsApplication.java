@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class CmsApplication  {
 
-	private static Logger LOG = LoggerFactory
+	private static final Logger LOG = LoggerFactory
 			.getLogger(CmsApplication.class);
 
 	public static void main(String[] args) {
