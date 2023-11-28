@@ -23,7 +23,7 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
     List<Activity> getReferenceById(@Param("username") String username, @Param("activityId") long activityId);
 */
 
-    @Query("SELECT a FROM Activity a WHERE a.user.username = :username AND a.date BETWEEN :startDate AND :endDate")
+    @Query("SELECT a FROM Activity a WHERE a.user.username = :username AND a.date BETWEEN :startDate AND :endDate ORDER BY a.date ASC")
     List<Activity> activityDuration(
             @Param("username") String username,
             @Param("startDate") LocalDate startDate,
