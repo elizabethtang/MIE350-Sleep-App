@@ -33,15 +33,8 @@ public class SleepDataController {
     @PostMapping("/sleep/create/{username}")
     public ResponseEntity<String> addSleep(@PathVariable("username") String username, @RequestBody SleepData sleepData) {
         try {
-            System.out.println("start");
-            // Add new sleep data
-            Random random = new Random();
-            System.out.println("creting");
-
             SleepData data = repository.save(sleepData);
-            System.out.println("saved");
 
-            // create new recommendation
             int sleepRecommendation = calculateSleepRecommendation();
             Recommendation recommendation = recommendationController.create(sleepData.getUser(), sleepRecommendation);
             System.out.println("recommendation");
@@ -52,8 +45,7 @@ public class SleepDataController {
 
             return ResponseEntity.ok("Sleep data saved successfully");
         } catch (Exception e) {
-            // Handle exceptions and return an appropriate response
-            // Log the exception
+
             System.err.println("Error saving sleep data: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error saving sleep data: " + e.getMessage());
         }

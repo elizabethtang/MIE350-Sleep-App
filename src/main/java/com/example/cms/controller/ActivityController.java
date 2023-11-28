@@ -32,7 +32,6 @@ public class ActivityController {
         return "Activity saved successfully";
     }
 
-    //TODO
 //    @GetMapping("/activity/{username}/{date}")
 //    List<Activity> getActivity(
 //            @PathVariable("username") String username,

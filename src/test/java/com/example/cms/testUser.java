@@ -51,7 +51,6 @@ public class testUser {
                         .content(new ObjectMapper().writeValueAsString(newUser)))
                 .andExpect(content().string(containsString("User created successfully, please continue to login page.")));
 
-        // Optional: Verify that the user was saved in the repository
         Optional<User> savedUser = userRepository.findById("testUser");
 
         assertTrue(savedUser.isPresent());
@@ -82,7 +81,6 @@ public class testUser {
                         .contentType(new ObjectMapper().writeValueAsString(sleepData)))
                 .andExpect(content().string(containsString("Sleep data saved successfully")));
 
-        // Verify that repository.save was called
         verify(sleepDataRepository, times(1)).save(any(SleepData.class));
         }
 
