@@ -24,13 +24,4 @@ public interface UserRepository extends JpaRepository<User, String> {
     @Query(value = "SELECT COUNT(*) FROM users u WHERE lower(u.username) = lower(:username)", nativeQuery = true)
     int existsByUsername(@Param("username") String username);
 
-
-    /*
-    @Query(value = "select * from students where " +
-            "id IN (SELECT s.id FROM STUDENTS s INNER JOIN MARKS m ON s.id = m.studentID " +
-            "group by s.id HAVING AVG(Mark) >= 90)", nativeQuery = true)
-    List<Student> findTopStudents();
-
-     */
-
 }

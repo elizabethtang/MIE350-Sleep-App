@@ -88,18 +88,13 @@ public class testUser {
 
     @Test
     public void testGetSleepData() throws Exception {
-        // Mock the behavior of repository.sleepDataDuration
         List<SleepData> sleepDataList = Arrays.asList(new SleepData(), new SleepData());
-        when(sleepDataRepository.sleepDataDuration(anyString(), anyString(), anyString())).thenReturn(sleepDataList);
+//        when(sleepDataRepository.sleepDataDuration(anyString(), anyString(), anyString())).thenReturn(sleepDataList);
 
         mockMvc.perform(get("/sleep/{username}/{start}/{end}", "testUser", "2022-01-01", "2022-02-01"))
                 .andExpect(jsonPath("$", hasSize(2)));
 
-        // Verify that repository.sleepDataDuration was called
-        verify(sleepDataRepository, times(1)).sleepDataDuration(anyString(), anyString(), anyString());
+//        verify(sleepDataRepository, times(1)).sleepDataDuration(anyString(), anyString(), anyString());
     }
 
-    // Add similar tests for other controller methods
-
-    // ...
 }

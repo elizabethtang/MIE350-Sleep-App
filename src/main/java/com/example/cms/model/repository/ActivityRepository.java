@@ -13,15 +13,6 @@ import java.util.List;
 
 @Repository
 public interface ActivityRepository extends JpaRepository<Activity, Long> {
-    //TODO
-    //List<Activity> activityDuration(String username, String date);
-
-
-/*
-    @Query(value = "select * from (USERS u INNER JOIN activityData a ON u.username = a.user_Username) where " +
-            "ActivityID = '%', :activityId, '%' AND user_Username = '%', :username, '%' ", nativeQuery = true)
-    List<Activity> getReferenceById(@Param("username") String username, @Param("activityId") long activityId);
-*/
 
     @Query("SELECT a FROM Activity a WHERE a.user.username = :username AND a.date BETWEEN :startDate AND :endDate ORDER BY a.date ASC")
     List<Activity> activityDuration(
